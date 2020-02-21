@@ -28,4 +28,13 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\GraphQl\Schema\Type\Entity\DefaultMapper">
+        <arguments>
+            <argument name="map" xsi:type="array">
+                <item name="catalog_product" xsi:type="array">
+                    <item name="mp_store_credit" xsi:type="string">StoreCreditProduct</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
