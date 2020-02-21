@@ -1,0 +1,78 @@
+## ======================================== Store Credit Spending ===================================================================
+type Mutation {
+    MpStoreCreditCustomerSpending (
+        cart_id: String! @doc(description: "Cart Id")
+        amount: Float! @doc(description: "Amount")
+    ): [TotalSegmentsOutput] @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\Customer\\Spending") @doc(description: "Spending")
+}
+
+type TotalSegmentsOutput {
+    code: String
+    title: String
+    value: String
+}
+
+## ======================================== Customer ===================================================================
+type Customer {
+    mp_store_credit:MpStoreCreditCustomersOutput @doc(description: "Store Credit customer") @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\StoreCreditCustomer\\Account")
+}
+
+## ======================================== Store Credit customers ===========================================================
+type MpStoreCreditCustomersOutput {
+    customer_id: Int @doc(description: "Customer Id")
+    mp_credit_balance: Float @doc(description: "Mp Credit Balance")
+    mp_credit_notification: Int @doc(description: "Mp Credit Notification")
+    transactions(
+        filter: MpStoreCreditCustomerTransactionFilterInput @doc(description: "Identifies which MpStoreCreditCustomerTransactionFilterInput attributes to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ):MpStoreCreditCustomerTransactionListOutput @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\StoreCreditCustomer\\Transaction") @doc(description: "The query searches for store credit customer.")
+}
+
+### ========================================= Store Credit transaction =======================================================
+input MpStoreCreditCustomerTransactionFilterInput {
+    transaction_id: FilterTypeInput @doc(description: "Transaction Id")
+    customer_id: FilterTypeInput @doc(description: "Customer Id")
+    order_id: FilterTypeInput @doc(description: "Order Id")
+    title: FilterTypeInput @doc(description: "Title")
+    status: FilterTypeInput @doc(description: "Status")
+    action: FilterTypeInput @doc(description: "Action")
+    amount: FilterTypeInput @doc(description: "Amount")
+    balance: FilterTypeInput @doc(description: "Balance")
+    customer_note: FilterTypeInput @doc(description: "Customer Note")
+    admin_note: FilterTypeInput @doc(description: "Admin Note")
+    created_at: FilterTypeInput @doc(description: "Created At")
+}
+
+type MpStoreCreditCustomerTransactionListOutput {
+    total_count: Int @doc(description: "The total number of results returned when a query is applied"),
+    items: [MpStoreCreditCustomerTransaction] @doc(description: "MpStoreCreditCustomerTransaction data is satisfied")
+}
+
+type MpStoreCreditCustomerTransaction {
+    transaction_id: Int @doc(description: "Transaction Id")
+    customer_id: Int @doc(description: "Customer Id")
+    order_id: Int @doc(description: "Order Id")
+    title: String @doc(description: "Title")
+    status: Int @doc(description: "Status")
+    action: String @doc(description: "Action")
+    amount: Float @doc(description: "Amount")
+    balance: Float @doc(description: "Balance")
+    customer_note: String @doc(description: "Customer Note")
+    admin_note: String @doc(description: "Admin Note")
+    created_at: String @doc(description: "Created At")
+}
+
+### ========================================= Products =======================================================
+type StoreCreditProduct implements ProductInterface, CustomizableProductInterface @doc(description: "Store Credit defines basic features of a bundle product and contains multiple BundleItems.") {
+}
+
+interface ProductInterface {
+    mp_store_credit_attributes: [StoreCreditProductAttributes] @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\Product\\ProductAttribute") @doc(description: "Store Credit product attributes")
+}
+
+type StoreCreditProductAttributes {
+    attribute_code: String @doc(description: "Attribute code")
+    value: String @doc(description: "Attribute value")
+}
+
