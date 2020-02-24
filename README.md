@@ -12,7 +12,7 @@ php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
 
-#### How to use
+## How to use
 
 - Mageplaza's Store Credit Extension supports getting customer information and transactions, retrieving product information and using credits through GraphQL.
 - Note: To perform GraphQL queries in Magento you need to use Magento 2.3.x and return the site to developer mode.
