@@ -81,7 +81,7 @@ class Account implements ResolverInterface
 
         $customer = $value['model'];
 
-        $storeCreditCustomer            = $this->storeCreditCustomerFactory->create()->loadByCustomerId($customer->getId());
+        $storeCreditCustomer = $this->storeCreditCustomerFactory->create()->loadByCustomerId($customer->getId());
         $data                           = $storeCreditCustomer->toArray();
         $data['mp_credit_balance']      = $storeCreditCustomer->getMpCreditBalance();
         $data['mp_credit_notification'] = $storeCreditCustomer->getMpCreditNotification();

@@ -1,0 +1,5 @@
+"Store Credit is disabled.","Store Credit is disabled."
+"The current customer isn't authorized.","The current customer isn't authorized."
+"""model"" value should be specified","""model"" value should be specified"
+"currentPage value must be greater than 0.","currentPage value must be greater than 0."
+"pageSize value must be greater than 0.","pageSize value must be greater than 0."

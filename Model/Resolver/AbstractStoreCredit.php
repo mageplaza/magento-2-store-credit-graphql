@@ -42,7 +42,7 @@ abstract class AbstractStoreCredit implements ResolverInterface
     protected $helperData;
 
     /**
-     * AbstractReward constructor.
+     * AbstractStoreCredit constructor.
      *
      * @param Data $helperData
      */
@@ -57,7 +57,7 @@ abstract class AbstractStoreCredit implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         if (!$this->helperData->isEnabled()) {
-            throw new GraphQlNoSuchEntityException(__('Reward points is disabled.'));
+            throw new GraphQlNoSuchEntityException(__('Store Credit is disabled.'));
         }
 
         if ($this->helperData->versionCompare('2.3.3')) {

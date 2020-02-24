@@ -117,4 +117,3 @@ class Transaction extends AbstractStoreCredit
         return $result;
     }
 }
-
