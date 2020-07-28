@@ -27,6 +27,7 @@ namespace Mageplaza\StoreCreditGraphQl\Model\Resolver\FilterArgument;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\ConfigInterface;
 use Magento\Framework\GraphQl\Query\Resolver\Argument\FieldEntityAttributesInterface;
+use Mageplaza\StoreCredit\Helper\Data;
 
 /**
  * Class StoreCreditTransaction
@@ -45,13 +46,20 @@ class StoreCreditTransaction implements FieldEntityAttributesInterface
     private $config;
 
     /**
-     * FilterArgument constructor.
+     * @var Data
+     */
+    private $helperData;
+
+    /**
+     * StoreCreditTransaction constructor.
      *
      * @param ConfigInterface $config
+     * @param Data $helperData
      */
-    public function __construct(ConfigInterface $config)
+    public function __construct(ConfigInterface $config, Data $helperData)
     {
-        $this->config = $config;
+        $this->config     = $config;
+        $this->helperData = $helperData;
     }
 
     /**
@@ -63,9 +71,10 @@ class StoreCreditTransaction implements FieldEntityAttributesInterface
 
         /** @var Field $field */
         foreach ($this->config->getConfigElement($this->type)->getFields() as $field) {
-            $fields[$field->getName()] = '';
+            $fieldName          = $field->getName();
+            $fields[$fieldName] = ['fieldName' => $fieldName];
         }
 
-        return array_keys($fields);
+        return $this->helperData->versionCompare('2.3.4') ? $fields : array_keys($fields);
     }
 }
