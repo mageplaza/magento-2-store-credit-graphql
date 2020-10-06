@@ -76,3 +76,7 @@ type StoreCreditProductAttributes {
     value: String @doc(description: "Attribute value")
 }
 
+type MpStoreCreditCartItem implements CartItemInterface @doc(description: "Simple Cart Item") {
+    customizable_options: [SelectedCustomizableOption] @resolver(class: "Magento\\QuoteGraphQl\\Model\\Resolver\\CustomizableOptions")
+}
+
