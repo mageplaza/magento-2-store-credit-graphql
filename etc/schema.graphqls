@@ -4,6 +4,7 @@ type Mutation {
         cart_id: String! @doc(description: "Cart Id")
         amount: Float! @doc(description: "Amount")
     ): [TotalSegmentsOutput] @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\Customer\\Spending") @doc(description: "Spending")
+    UpdateBalanceNotification(mp_credit_notification: Int!): Boolean @resolver(class: "\\Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\Customer\\UpdateBalanceNotification") @doc(description: "update balance notification")
 }
 
 type TotalSegmentsOutput {
