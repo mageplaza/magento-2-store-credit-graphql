@@ -80,3 +80,7 @@ type MpStoreCreditCartItem implements CartItemInterface @doc(description: "Simpl
     customizable_options: [SelectedCustomizableOption] @resolver(class: "Magento\\QuoteGraphQl\\Model\\Resolver\\CustomizableOptions")
 }
 
+type CartPrices {
+    mp_store_credit_discount: [TotalSegmentsOutput] @doc(description:"An array of store credit discounts") @resolver(class: "\\Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\Customer\\StoreCreditDiscount")
+}
+
