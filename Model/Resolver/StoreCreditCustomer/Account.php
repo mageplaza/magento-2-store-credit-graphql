@@ -28,6 +28,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Mageplaza\StoreCredit\Helper\Data;
+use Mageplaza\StoreCredit\Helper\Account as HelperAccount;
 use Mageplaza\StoreCredit\Model\CustomerFactory;
 
 /**
@@ -47,17 +48,25 @@ class Account implements ResolverInterface
     protected $helperData;
 
     /**
+     * @var HelperAccount
+     */
+    protected $helperAccount;
+
+    /**
      * Account constructor.
      *
      * @param CustomerFactory $storeCreditCustomerFactory
      * @param Data $helperData
+     * @param HelperAccount $helperAccount
      */
     public function __construct(
         CustomerFactory $storeCreditCustomerFactory,
-        Data $helperData
+        Data $helperData,
+        HelperAccount $helperAccount
     ) {
         $this->helperData                 = $helperData;
         $this->storeCreditCustomerFactory = $storeCreditCustomerFactory;
+        $this->helperAccount              = $helperAccount;
     }
 
     /**
@@ -81,9 +90,9 @@ class Account implements ResolverInterface
 
         $customer = $value['model'];
 
-        $storeCreditCustomer = $this->storeCreditCustomerFactory->create()->loadByCustomerId($customer->getId());
+        $storeCreditCustomer            = $this->storeCreditCustomerFactory->create()->loadByCustomerId($customer->getId());
         $data                           = $storeCreditCustomer->toArray();
-        $data['mp_credit_balance']      = $storeCreditCustomer->getMpCreditBalance();
+        $data['mp_credit_balance']      = $this->helperAccount->getConvertAndFormatBalance($storeCreditCustomer->getMpCreditBalance(), $customer->getId());
         $data['mp_credit_notification'] = $storeCreditCustomer->getMpCreditNotification();
 
         $data['customer'] = $customer;
