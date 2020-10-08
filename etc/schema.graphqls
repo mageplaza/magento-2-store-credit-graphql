@@ -5,6 +5,7 @@ type Mutation {
         amount: Float! @doc(description: "Amount")
     ): [TotalSegmentsOutput] @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\Customer\\Spending") @doc(description: "Spending")
     UpdateBalanceNotification(mp_credit_notification: Int!): Boolean @resolver(class: "\\Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\Customer\\UpdateBalanceNotification") @doc(description: "update balance notification")
+    addStoreCreditProductsToCart(input: AddStoreCreditProductsToCartInput): AddStoreCreditProductsToCartOutput @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\AddStoreCreditProductsToCart")
 }
 
 type TotalSegmentsOutput {
@@ -86,10 +87,6 @@ type CartPrices {
 }
 
 ### ========================================= Add Membership Product =======================================================
-type Mutation {
-    addStoreCreditProductsToCart(input: AddStoreCreditProductsToCartInput): AddStoreCreditProductsToCartOutput @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\AddStoreCreditProductsToCart")
-}
-
 input AddStoreCreditProductsToCartInput {
     cart_id: String!
     store_credit_input: StoreCreditInput!
