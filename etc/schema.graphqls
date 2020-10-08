@@ -85,3 +85,21 @@ type CartPrices {
     mp_store_credit_discount: [TotalSegmentsOutput] @doc(description:"An array of store credit discounts") @resolver(class: "\\Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\Customer\\StoreCreditDiscount")
 }
 
+### ========================================= Add Membership Product =======================================================
+type Mutation {
+    addStoreCreditProductsToCart(input: AddStoreCreditProductsToCartInput): AddStoreCreditProductsToCartOutput @resolver(class: "Mageplaza\\StoreCreditGraphQl\\Model\\Resolver\\AddStoreCreditProductsToCart")
+}
+
+input AddStoreCreditProductsToCartInput {
+    cart_id: String!
+    store_credit_input: StoreCreditInput!
+}
+
+input StoreCreditInput {
+    sku: String!
+    credit_amount: Float
+}
+
+type AddStoreCreditProductsToCartOutput {
+    cart: Cart!
+}
