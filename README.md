@@ -1,4 +1,4 @@
-# Store Credit GraphQL
+# Magento 2 Store Credit GraphQL
 
 Mageplaza Store Credit Extension supports getting and pushing data on the website with GraphQl.
 
