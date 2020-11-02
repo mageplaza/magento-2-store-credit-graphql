@@ -1,4 +1,4 @@
-# Magento 2 Customer Attributes GraphQL/PWA
+# Magento 2 Store Credit GraphQL/PWA
 
 Magento 2 Store Credit GraphQL is a part of Store Credit extension that add GraphQL features, this support for PWA Studio.
 ## 1. How to install
