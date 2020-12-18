@@ -1,5 +1,7 @@
 # Magento 2 Store Credit GraphQL (Support PWA)
 
+**Magento 2 Store Credit GraphQL is now a part of Mageplaza Store Credit for Magento 2 that adds GraphQL features.** This update supports PWA compatibility. The extension supports getting and pushing data on the website with GraphQL.
+
 [Mageplaza Store Credit for Magento 2](https://www.mageplaza.com/magento-2-store-credit/) is a useful tool to increase customer retention and boost sales for online stores by utilizing store credit. 
 
 The store credit can come from a certain amount of compensation for the unpleasant events during the shopping journey. It can also be a reward that online stores give to customers for purchasing something. This store credit can be used by customers to buy products directly from the store or give it to their friends as gifts. That the store enables customers to have credit in their account and freely make use of them is a big incentive for customers to stay loyal to your store. 
@@ -11,8 +13,6 @@ Customers can buy products at a lower price by using their available store credi
 Customers will know any change in their store credit balance via an automatic email notification. After spending on shopping, the credit balance will automatically update the current number of credits, and customers will be able to control their spending appropriately. 
 
 Store Credit extension will help you generate and manage customers’ credit in an optimized and transparent way. Customer retention will increase as a result. 
-
-Moreover, **Magento 2 Store Credit GraphQL is now a part of Mageplaza Store Credit for Magento 2 that adds GraphQL features.** This update supports PWA compatibility. The extension supports getting and pushing data on the website with GraphQl.
 
 ## 1. How to install
 
