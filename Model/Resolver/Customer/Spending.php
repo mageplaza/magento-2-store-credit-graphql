@@ -23,7 +23,11 @@ declare(strict_types=1);
 
 namespace Mageplaza\StoreCreditGraphQl\Model\Resolver\Customer;
 
+use Magento\Framework\Exception\InputException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\GraphQl\Config\Element\Field;
+use Magento\Framework\GraphQl\Exception\GraphQlInputException;
+use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\QuoteGraphQl\Model\Cart\GetCartForUser;
 use Mageplaza\StoreCredit\Model\Api\SpendingManagement;
@@ -81,15 +85,21 @@ class Spending extends AbstractStoreCredit
 
         if ($this->helperData->versionCompare('2.3.3')) {
             $store = $context->getExtensionAttributes()->getStore();
-            $quote = $this->getCartForUser->execute($args['cart_id'], $context->getUserId(), (int) $store->getId());
+            $quote = $this->getCartForUser->execute($args['cart_id'], $context->getUserId(), (int)$store->getId());
         } else {
             $quote = $this->getCartForUser->execute($args['cart_id'], $context->getUserId());
         }
 
-        $totals = $this->spendingManagement->spend(
-            $quote->getId(),
-            $args['amount']
-        );
+        try {
+            $totals = $this->spendingManagement->spend(
+                $quote->getId(),
+                $args['amount']
+            );
+        } catch (InputException $e) {
+            throw new GraphQlInputException(__($e->getMessage()));
+        } catch (NoSuchEntityException $e) {
+            throw new GraphQlNoSuchEntityException(__($e->getMessage()));
+        }
 
         return $totals->getTotalSegments();
     }
