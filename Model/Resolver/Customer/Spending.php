@@ -101,6 +101,13 @@ class Spending extends AbstractStoreCredit
             throw new GraphQlNoSuchEntityException(__($e->getMessage()));
         }
 
-        return $totals->getTotalSegments();
+        $totalSegments = $totals->getTotalSegments();
+        foreach ($totalSegments as $key => $segment) {
+            if (is_array($segment->getValue())) {
+                unset($totalSegments[$key]);
+            }
+        }
+
+        return $totalSegments;
     }
 }
